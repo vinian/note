@@ -1,0 +1,249 @@
+=pod
+
+=head1 B<perl日常学习笔记>
+
+POD 格式 http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
+
+=over 1000
+
+=item B<1.文件中匹配部分之间的内容>
+
+处理一个文件中!! START !! 到 !! END !! 间的数据
+
+ while (<FILE>) {
+    if (/!! START !!/ .. /!! END !!/) {
+      # process line
+    }
+  }
+
+相关符号 $/; $\, 输入和输出文件描述符
+参考文档  http://www.perl.com/pub/2004/06/18/variables.html
+
+=item B<2.显示一个文件的前10行>
+
+  while (<FILE>) {
+    print if 1 .. 10;
+  }
+
+参考文件 见上
+
+=item B<3.一次读入整个文件>
+
+1. my $file = do { local $/; <FILE> };
+
+2. my $file = do {
+      open my $fh, '<:mmap', $inFile
+      	      	    or die "";
+      <$fh>
+}
+		    
+=item B<4.一次读入多个文件>
+
+my @open_fh = map {open my $fh, '<', $_; $fh} @file;
+
+=item B<5.每次读入指定字节的数据>
+
+read a file 2Kb at a time and you can do this.
+
+  {
+    local $/ = \2048;
+
+    while (<FILE>) {
+      # $_ contains the next 2048 bytes from FILE
+    }
+  }
+
+=item B<6.noName>
+   
+The string that is printed between the arguments passed to print is stored in a variable called $, (because you use a comma to separate arguments)
+
+  my @arr = (1, 2, 3);
+  {
+    local $, = ',';
+
+    print @arr;
+  }
+
+This code prints the string 1,2,3.
+   
+The string that separates the elements of an array when expanded in a double quoted string is stored in $";
+
+  my @arr = (1, 2, 3);
+  {
+    local $" = '+';
+
+    print "@arr";
+  }
+
+This code prints 1+2+3".
+
+=item B<7.添加详细错误信息>
+
+use Carp ();
+
+local $SIG{__WARN__} = \&Carp::cluck;
+
+=item B<8.heredoc>
+
+替换变量
+my $interpolation = "We will interpolated variables";
+print <<"END";
+With double quotes, $interpolation, just like normal HEREDOCS.
+END
+
+show what i type
+print <<'END';
+With single quotes, the variable $foo will *not* be interpolated.
+(You have probably seen this in other languages.)
+END
+ 
+Execute it as command
+my $shell_output = <<`END`;
+echo With backticks, these commands will be executed in shell.
+echo The output is returned.
+ls | wc -l
+END 
+
+
+=item B<9.}{ magic>
+
+ls |perl -lne 'print $_; }{ print "$. Files"'
+
+which is converted internally to this code:
+
+LINE: while (defined($_ = <ARGV>)) {
+    print $_; }{ print "$. Files";
+}
+
+=item B<10. @INC %INC>
+
+@INC: contains a lists of modules from which perl modules and libraries can be load;
+
+%INC: cache the names of files and modules that were successfully loaded and compiled by use(), require() and do();
+
+perl -le 'print join "\n", @INC'
+
+perl -MLWP -e 'print map {"$_ => $INC{$_}\n"} sort keys %INC'
+
+
+=item B<11.use do require>
+
+Before load a file with use or require, Perl checks whether it's already in the %INC, if %INC has, require just returns  without doing a thing. do does unconditional loading--no lookup in the %INC hash;
+
+If require() fails to load the file, either beacuse it couldn't find the file in question or the code failed to compile, or it didn't return TRUE, then the program will die(). To prevent this the require() statement can be enclosed into an eval() execption-handling blocks;
+
+use() load and compile files containing perl code, but it works with modules only and is executed at compile time. use translate :: int /;
+use () is equivalent: BEGIN { require Module; Module->import(LIST);}
+
+If do() can't read the file, it return undef and set $! to report error.
+If do() can read the file but can't compile it, it returns undef and puts error msg in $@. If the file is successfully compiled, do() return the value of the last expression evaluated.
+
+=item B<12.load module>
+
+use FindBin;
+use lib "$FindBin::Bin";
+use PrivateModule;   ## 添加自己要使用的模块
+
+=item B<13. 正则表达式替换>
+
+m//o;
+s///e;
+
+=item B<14.perl -[dD]>
+
+perl -dt indicated the debugger that threads will be used in the code being debugged.
+
+perl -Dx list compiled syntax tree
+
+perl -Dr list comipled regular experssion
+
+
+=item B<16.don't quote large string unless absolutely necessary>
+
+	  my $copy = "$large_string";
+makes 2 copies of $large_string (one for $copy and another for the quote)
+	  my $copy = $large_string;
+only makes one copy.
+
+=item B<17.use map and grep selectively>
+
+map and grep expect a LIST argument, so doing this:
+	@wanted = grep { /pattern/ } <FILE>;
+will cause the entire file to be slurp. for large files, it's better to loop:
+	 while ( <FILE> ) {
+	 	   push (@wanted, $_) if /pattern/;
+	 }	
+
+=item B<18. Expand function call inside string>
+
+call the function inside the braces used to dereference a reference. If we have more than on return value, we can construct and dereference an anonymous array, in this case, we call the function in list context.
+
+	 print "The time value are @{ [localtime] }.\n";
+
+call function in scalar context
+
+	 print "The time value are ${ \(scalar localtime) }.\n";
+	 print "The time value are ${ my $x = localtime; \$x }.\n";
+
+if your function already returns a reference, you don't need to create  the reference yourself.
+   
+   sub timestamp { my $t = localtime; \$t }
+   print "The time value are ${ timestamp() }.\n";   
+
+The "Interpolation" module can also get the result.
+	
+	use Interpolation E => 'eval';
+	print "The time values are $E{localtime()}.\n";
+
+=item B<19. expand tabls in a string>
+
+1 while $string =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e;
+
+=item B<20. expand variable in text strings>
+
+The first /e evaluates $1 on the replacement side and turns it in into  $foo, the second /e evalutes starts with $foo and replaces it with its value.
+	
+	$foo = 'Fred';
+	$bar = 'Barney';
+	$string = 'Say hello to $foo and $bar';
+	$string =~ s/(\$\w+)/$1/eeg;	  
+
+
+=item B<21. running command>
+
+There are three basic ways of running external commands:
+
+        system $cmd;            # using system()
+        $output = `$cmd`;               # using backticks (``)
+        open (PIPE, "cmd |");   # using open()
+
+With "system()", both STDOUT and STDERR will go the same place as the
+script's STDOUT and STDERR, unless the "system()" command redirects
+them.  Backticks and "open()" read only the STDOUT of your command.
+
+=item B<22. Back file on command line>
+
+perl -pi'old/*.orig' -e 's/bar/baz/' fileA # backup to 'old/fileA.orig'
+perl -pi -e 's/bar/baz/' fileA # overwrite current file
+perl -pi'*' -e 's/bar/baz/' fileA # overwrite current file
+perl -pi'.orig' -e 's/bar/baz/' fileA # backup to 'fileA.orig'
+perl -pi'*.orig' -e 's/bar/baz/' fileA # backup to 'fileA.orig'
+
+a fancy way copy file
+perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...
+or
+$ perl -p -i'.orig' -e 1 file1 file2 file3...
+
+=item B<23. effective way delete file>
+
+find . -mtime +7 -print | perl -nle unlink
+This is faster than using the -exec switch of find because you don't have to start a process on every filename found.
+
+
+=item B<24. >
+
+=cut
+
+=back
+
+__END__

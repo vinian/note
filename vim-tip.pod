@@ -1,0 +1,17 @@
+=pod
+
+=over 1000
+
+=item B<关闭当前搜索高亮>
+
+set hlsearch "打开高亮搜索
+set nohlsearch "关闭高亮搜索
+nohl "只取消掉当前的搜索高亮
+
+map <C-n> :nohl<cr>
+只需要按Ctrl-n取消查找后的高亮显示
+
+=item B<>
+
+
+=cut
