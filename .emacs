@@ -278,10 +278,6 @@
   ;; If there is more than one, they won't work right.
  )
 
-
-
-
-
 ;;(add-to-list 'load-path "~/.emacs.d")
 ;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
 ;;(require 'auto-complete-config)
@@ -309,44 +305,6 @@ print a message in the minibuffer with the result."
 		(forward-word 1)
 		(setq count (1+ count)))
 	  (message "buffer contains %s words." count))))
-
-;;;;email && usenet
-
-;; gnus setup
-(setq user-mail-address "veinian@gmail.com")
-(setq user-full-name "Wei Hua")
-
-;; pop setup
-(setq mail-sources
-      '((pop :server "pop.gmail.com"
-             :port 995
-             :user "veinian@gmail.com"
-             :password "azhang198608"
-             :stream ssl)))
-
-;;(add-to-list 'gnus-secondary-select-methods '(nnimap "gmail"
-;;                                  (nnimap-address "imap.gmail.com")
-;;                                  (nnimap-server-port 993)
-;;                                  (nnimap-stream ssl)))
-
-
-;; smtp
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "veinian@gmail.com" nil))
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587
-      smtpmail-local-domain "vvvi-toy")
-
-
-;; nntp setup
-(setq gnus-select-method '(nntp "news.newsfan.net"))
-;;;;;mail-spool
-(setq gnus-secondary-select-methods '((nnml "")))
-;;;;;news-spool
-(setq gnus-select-method '(nnspool ""))
-
 
 ;; author: pluskid
 ;; 调用 stardict 的命令行接口来查辞典
