@@ -466,7 +466,7 @@ print a message in the minibuffer with the result."
 
 ;; (add-to-list 'load-path "~/.cpanplus/5.12.4/build/Emacs-PDE-0.2.16/lisp/")
 
-(load-file "/home/vinian/.emacs.d/cedet-1.0/common/cedet-graphviz.el")
+(load-file "~/.emacs.d/cedet-1.0/common/cedet-graphviz.el")
 
 (set-frame-parameter (selected-frame) 'alpha '(85 50))
 (add-to-list 'default-frame-alist '(alpha 85 50))
