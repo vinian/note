@@ -10,7 +10,7 @@ POD ∏Ò Ω http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
 
 match !! START !! to  !! END !!
 
- <while (<FILE>) {
+ while (<FILE>) {
     if (/!! START !!/ .. /!! END !!/) {
       # process line
     }
@@ -31,15 +31,15 @@ ref  http://www.perl.com/pub/2004/06/18/variables.html
 
 1. C<my $file = do { local $/; <FILE> };>
 
-2. C<my $file = do {
+2. my $file = do {
       open my $fh, '<:mmap', $inFile
       	      	    or die "";
-      <$fh>>
-}
+      <$fh>
+      }
 		    
 =item B<4.open many file>
 
-      my @open_fh = map {open my $fh, '<', $_; $fh} @file;
+      my @open_fh = map { open my $fh, '<', $_; $fh } @file;
 
 =item B<5.get fixed size data>
 
@@ -86,18 +86,21 @@ This code prints 1+2+3".
 =item B<8.heredoc>
 
 substitle
+
 	my $interpolation = "We will interpolated variables";
 	print <<"END";
 	With double quotes, $interpolation, just like normal HEREDOCS.
 	END
 
 show what i type
+
      print <<'END';
      With single quotes, the variable $foo will *not* be interpolated.
      (You have probably seen this in other languages.)
      END
  
 Execute it as command
+
 	my $shell_output = <<`END`;
 	echo With backticks, these commands will be executed in shell.
 	echo The output is returned.
@@ -113,7 +116,7 @@ which is converted internally to this code:
 
       LINE: while (defined($_ = <ARGV>)) {
           print $_; }{ print "$. Files";
-	  }
+      }
 
 =item B<10. @INC %INC>
 
@@ -160,17 +163,23 @@ perl -Dr list comipled regular experssion
 
 =item B<16.don't quote large string unless absolutely necessary>
 
-	  my $copy = "$large_string";
+  my $copy = "$large_string";
+  
 makes 2 copies of $large_string (one for $copy and another for the quote)
-	  my $copy = $large_string;
+
+  my $copy = $large_string;
+  
 only makes one copy.
 
 =item B<17.use map and grep selectively>
 
 map and grep expect a LIST argument, so doing this:
-	@wanted = grep { /pattern/ } <FILE>;
+
+    @wanted = grep { /pattern/ } <FILE>;
+
 will cause the entire file to be slurp. for large files, it's better to loop:
-	 while ( <FILE> ) {
+
+     while ( <FILE> ) {
 	 	   push (@wanted, $_) if /pattern/;
 	 }	
 
@@ -178,12 +187,12 @@ will cause the entire file to be slurp. for large files, it's better to loop:
 
 call the function inside the braces used to dereference a reference. If we have more than on return value, we can construct and dereference an anonymous array, in this case, we call the function in list context.
 
-	 print "The time value are @{ [localtime] }.\n";
+   print "The time value are @{ [localtime] }.\n";
 
 call function in scalar context
 
-	 print "The time value are ${ \(scalar localtime) }.\n";
-	 print "The time value are ${ my $x = localtime; \$x }.\n";
+   print "The time value are ${ \(scalar localtime) }.\n";
+   print "The time value are ${ my $x = localtime; \$x }.\n";
 
 if your function already returns a reference, you don't need to create  the reference yourself.
    
@@ -192,30 +201,29 @@ if your function already returns a reference, you don't need to create  the refe
 
 The "Interpolation" module can also get the result.
 	
-	use Interpolation E => 'eval';
-	print "The time values are $E{localtime()}.\n";
+   use Interpolation E => 'eval';
+   print "The time values are $E{localtime()}.\n";
 
 =item B<19. expand tabls in a string>
 
-      1 while $string =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e;
+   1 while $string =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e;
 
 =item B<20. expand variable in text strings>
 
 The first /e evaluates $1 on the replacement side and turns it in into  $foo, the second /e evalutes starts with $foo and replaces it with its value.
 	
-	$foo = 'Fred';
-	$bar = 'Barney';
-	$string = 'Say hello to $foo and $bar';
-	$string =~ s/(\$\w+)/$1/eeg;	  
-
+   $foo = 'Fred';
+   $bar = 'Barney';
+   $string = 'Say hello to $foo and $bar';
+   $string =~ s/(\$\w+)/$1/eeg;	  
 
 =item B<21. running command>
 
 There are three basic ways of running external commands:
 
-        system $cmd;            # using system()
-        $output = `$cmd`;               # using backticks (``)
-        open (PIPE, "cmd |");   # using open()
+   system $cmd;            # using system()
+   $output = `$cmd`;               # using backticks (``)
+   open (PIPE, "cmd |");   # using open()
 
 With "system()", both STDOUT and STDERR will go the same place as the
 script's STDOUT and STDERR, unless the "system()" command redirects
@@ -235,10 +243,10 @@ them.  Backticks and "open()" read only the STDOUT of your command.
 
 a fancy way copy file
 
-  perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...
+   perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...
 
 or
-	perl -p -i'.orig' -e 1 file1 file2 file3...
+   perl -p -i'.orig' -e 1 file1 file2 file3...
 
 =item B<23. effective way delete file>
 
@@ -253,4 +261,3 @@ This is faster than using the -exec switch of find because you don't have to sta
 
 =back
 
-__END__
