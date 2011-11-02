@@ -1,33 +1,33 @@
 =pod
 
-=head1 B<perl日常学习笔记>
+=head1 B<perl note>
 
 POD 格式 http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
 
 =over 1000
 
-=item B<1.文件中匹配部分之间的内容>
+=item B<1. match content from ... to ...>
 
-处理一个文件中!! START !! 到 !! END !! 间的数据
+match !! START !! to  !! END !!
 
- while (<FILE>) {
+ C<while (<FILE>) {
     if (/!! START !!/ .. /!! END !!/) {
       # process line
     }
-  }
+  }>
 
-相关符号 $/; $\, 输入和输出文件描述符
-参考文档  http://www.perl.com/pub/2004/06/18/variables.html
+Input fh: $/; Output fh: $\  
 
-=item B<2.显示一个文件的前10行>
+ref  http://www.perl.com/pub/2004/06/18/variables.html
+
+=item B<2.show the first ten line of the file>
 
   while (<FILE>) {
     print if 1 .. 10;
   }
 
-参考文件 见上
 
-=item B<3.一次读入整个文件>
+=item B<3. slurp the whole file>
 
 1. my $file = do { local $/; <FILE> };
 
@@ -37,11 +37,11 @@ POD 格式 http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
       <$fh>
 }
 		    
-=item B<4.一次读入多个文件>
+=item B<4.open many file>
 
 my @open_fh = map {open my $fh, '<', $_; $fh} @file;
 
-=item B<5.每次读入指定字节的数据>
+=item B<5.get fixed size data>
 
 read a file 2Kb at a time and you can do this.
 
@@ -77,7 +77,7 @@ The string that separates the elements of an array when expanded in a double quo
 
 This code prints 1+2+3".
 
-=item B<7.添加详细错误信息>
+=item B<7. add more detail error info>
 
 use Carp ();
 
@@ -85,35 +85,35 @@ local $SIG{__WARN__} = \&Carp::cluck;
 
 =item B<8.heredoc>
 
-替换变量
-my $interpolation = "We will interpolated variables";
+substitle
+C<my $interpolation = "We will interpolated variables";
 print <<"END";
 With double quotes, $interpolation, just like normal HEREDOCS.
-END
+END>
 
 show what i type
-print <<'END';
+C<print <<'END';
 With single quotes, the variable $foo will *not* be interpolated.
 (You have probably seen this in other languages.)
-END
+END>
  
 Execute it as command
-my $shell_output = <<`END`;
+C<my $shell_output = <<`END`;
 echo With backticks, these commands will be executed in shell.
 echo The output is returned.
 ls | wc -l
-END 
+END>
 
 
 =item B<9.}{ magic>
 
-ls |perl -lne 'print $_; }{ print "$. Files"'
+C<ls |perl -lne 'print $_; }{ print "$. Files"'>
 
 which is converted internally to this code:
 
-LINE: while (defined($_ = <ARGV>)) {
+C<LINE: while (defined($_ = <ARGV>)) {
     print $_; }{ print "$. Files";
-}
+}>
 
 =item B<10. @INC %INC>
 
@@ -121,9 +121,9 @@ LINE: while (defined($_ = <ARGV>)) {
 
 %INC: cache the names of files and modules that were successfully loaded and compiled by use(), require() and do();
 
-perl -le 'print join "\n", @INC'
+C<perl -le 'print join "\n", @INC'>
 
-perl -MLWP -e 'print map {"$_ => $INC{$_}\n"} sort keys %INC'
+C<perl -MLWP -e 'print map {"$_ => $INC{$_}\n"} sort keys %INC'>
 
 
 =item B<11.use do require>
@@ -140,11 +140,11 @@ If do() can read the file but can't compile it, it returns undef and puts error 
 
 =item B<12.load module>
 
-use FindBin;
+C<use FindBin;
 use lib "$FindBin::Bin";
-use PrivateModule;   ## 添加自己要使用的模块
-
-=item B<13. 正则表达式替换>
+use PrivateModule;   ## add private module
+>
+=item B<13. regex>
 
 m//o;
 s///e;
@@ -160,19 +160,19 @@ perl -Dr list comipled regular experssion
 
 =item B<16.don't quote large string unless absolutely necessary>
 
-	  my $copy = "$large_string";
+	  C<my $copy = "$large_string";>
 makes 2 copies of $large_string (one for $copy and another for the quote)
-	  my $copy = $large_string;
+	  C<my $copy = $large_string;>
 only makes one copy.
 
 =item B<17.use map and grep selectively>
 
 map and grep expect a LIST argument, so doing this:
-	@wanted = grep { /pattern/ } <FILE>;
+	C<@wanted = grep { /pattern/ } <FILE>;>
 will cause the entire file to be slurp. for large files, it's better to loop:
-	 while ( <FILE> ) {
+	 C<while ( <FILE> ) {
 	 	   push (@wanted, $_) if /pattern/;
-	 }	
+	 }>	
 
 =item B<18. Expand function call inside string>
 
@@ -223,20 +223,28 @@ them.  Backticks and "open()" read only the STDOUT of your command.
 
 =item B<22. Back file on command line>
 
-perl -pi'old/*.orig' -e 's/bar/baz/' fileA # backup to 'old/fileA.orig'
-perl -pi -e 's/bar/baz/' fileA # overwrite current file
-perl -pi'*' -e 's/bar/baz/' fileA # overwrite current file
-perl -pi'.orig' -e 's/bar/baz/' fileA # backup to 'fileA.orig'
-perl -pi'*.orig' -e 's/bar/baz/' fileA # backup to 'fileA.orig'
+C<perl -pi'old/*.orig' -e 's/bar/baz/' fileA> # backup to 'old/fileA.orig'
+
+C<perl -pi -e 's/bar/baz/' fileA> # overwrite current file
+
+C<perl -pi'*' -e 's/bar/baz/' fileA> # overwrite current file
+
+C<perl -pi'.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
+
+C<perl -pi'*.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
 
 a fancy way copy file
-perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...
+
+C<perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...>
+
 or
-$ perl -p -i'.orig' -e 1 file1 file2 file3...
+
+C<perl -p -i'.orig' -e 1 file1 file2 file3...>
 
 =item B<23. effective way delete file>
 
-find . -mtime +7 -print | perl -nle unlink
+C<find . -mtime +7 -print | perl -nle unlink>
+
 This is faster than using the -exec switch of find because you don't have to start a process on every filename found.
 
 
