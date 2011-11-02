@@ -10,11 +10,11 @@ POD ∏Ò Ω http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
 
 match !! START !! to  !! END !!
 
- C<while (<FILE>) {
+ <while (<FILE>) {
     if (/!! START !!/ .. /!! END !!/) {
       # process line
     }
-  }>
+  }
 
 Input fh: $/; Output fh: $\  
 
@@ -29,17 +29,17 @@ ref  http://www.perl.com/pub/2004/06/18/variables.html
 
 =item B<3. slurp the whole file>
 
-1. my $file = do { local $/; <FILE> };
+1. C<my $file = do { local $/; <FILE> };>
 
-2. my $file = do {
+2. C<my $file = do {
       open my $fh, '<:mmap', $inFile
       	      	    or die "";
-      <$fh>
+      <$fh>>
 }
 		    
 =item B<4.open many file>
 
-my @open_fh = map {open my $fh, '<', $_; $fh} @file;
+      my @open_fh = map {open my $fh, '<', $_; $fh} @file;
 
 =item B<5.get fixed size data>
 
@@ -79,30 +79,30 @@ This code prints 1+2+3".
 
 =item B<7. add more detail error info>
 
-use Carp ();
+      use Carp ();
 
-local $SIG{__WARN__} = \&Carp::cluck;
+      local $SIG{__WARN__} = \&Carp::cluck;
 
 =item B<8.heredoc>
 
 substitle
-C<my $interpolation = "We will interpolated variables";
-print <<"END";
-With double quotes, $interpolation, just like normal HEREDOCS.
-END>
+	my $interpolation = "We will interpolated variables";
+	print <<"END";
+	With double quotes, $interpolation, just like normal HEREDOCS.
+	END
 
 show what i type
-C<print <<'END';
-With single quotes, the variable $foo will *not* be interpolated.
-(You have probably seen this in other languages.)
-END>
+     print <<'END';
+     With single quotes, the variable $foo will *not* be interpolated.
+     (You have probably seen this in other languages.)
+     END
  
 Execute it as command
-C<my $shell_output = <<`END`;
-echo With backticks, these commands will be executed in shell.
-echo The output is returned.
-ls | wc -l
-END>
+	my $shell_output = <<`END`;
+	echo With backticks, these commands will be executed in shell.
+	echo The output is returned.
+	ls | wc -l
+	END>
 
 
 =item B<9.}{ magic>
@@ -111,9 +111,9 @@ C<ls |perl -lne 'print $_; }{ print "$. Files"'>
 
 which is converted internally to this code:
 
-C<LINE: while (defined($_ = <ARGV>)) {
-    print $_; }{ print "$. Files";
-}>
+      LINE: while (defined($_ = <ARGV>)) {
+          print $_; }{ print "$. Files";
+	  }
 
 =item B<10. @INC %INC>
 
@@ -121,9 +121,9 @@ C<LINE: while (defined($_ = <ARGV>)) {
 
 %INC: cache the names of files and modules that were successfully loaded and compiled by use(), require() and do();
 
-C<perl -le 'print join "\n", @INC'>
+      perl -le 'print join "\n", @INC'
 
-C<perl -MLWP -e 'print map {"$_ => $INC{$_}\n"} sort keys %INC'>
+      perl -MLWP -e 'print map {"$_ => $INC{$_}\n"} sort keys %INC'
 
 
 =item B<11.use do require>
@@ -140,14 +140,14 @@ If do() can read the file but can't compile it, it returns undef and puts error 
 
 =item B<12.load module>
 
-C<use FindBin;
-use lib "$FindBin::Bin";
-use PrivateModule;   ## add private module
->
+      use FindBin;
+      use lib "$FindBin::Bin";
+      use PrivateModule;   ## add private module
+
 =item B<13. regex>
 
-m//o;
-s///e;
+      m//o;
+      s///e;
 
 =item B<14.perl -[dD]>
 
@@ -160,19 +160,19 @@ perl -Dr list comipled regular experssion
 
 =item B<16.don't quote large string unless absolutely necessary>
 
-	  C<my $copy = "$large_string";>
+	  my $copy = "$large_string";
 makes 2 copies of $large_string (one for $copy and another for the quote)
-	  C<my $copy = $large_string;>
+	  my $copy = $large_string;
 only makes one copy.
 
 =item B<17.use map and grep selectively>
 
 map and grep expect a LIST argument, so doing this:
-	C<@wanted = grep { /pattern/ } <FILE>;>
+	@wanted = grep { /pattern/ } <FILE>;
 will cause the entire file to be slurp. for large files, it's better to loop:
-	 C<while ( <FILE> ) {
+	 while ( <FILE> ) {
 	 	   push (@wanted, $_) if /pattern/;
-	 }>	
+	 }	
 
 =item B<18. Expand function call inside string>
 
@@ -197,7 +197,7 @@ The "Interpolation" module can also get the result.
 
 =item B<19. expand tabls in a string>
 
-1 while $string =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e;
+      1 while $string =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e;
 
 =item B<20. expand variable in text strings>
 
@@ -223,23 +223,22 @@ them.  Backticks and "open()" read only the STDOUT of your command.
 
 =item B<22. Back file on command line>
 
-C<perl -pi'old/*.orig' -e 's/bar/baz/' fileA> # backup to 'old/fileA.orig'
+      perl -pi'old/*.orig' -e 's/bar/baz/' fileA> # backup to 'old/fileA.orig'
 
-C<perl -pi -e 's/bar/baz/' fileA> # overwrite current file
+      perl -pi -e 's/bar/baz/' fileA> # overwrite current file
 
-C<perl -pi'*' -e 's/bar/baz/' fileA> # overwrite current file
+      perl -pi'*' -e 's/bar/baz/' fileA> # overwrite current file
 
-C<perl -pi'.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
+      perl -pi'.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
 
-C<perl -pi'*.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
+      perl -pi'*.orig' -e 's/bar/baz/' fileA> # backup to 'fileA.orig'
 
 a fancy way copy file
 
-C<perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...>
+  perl -p -i'/some/file/path/*' -e 1 file1 file2 file3...
 
 or
-
-C<perl -p -i'.orig' -e 1 file1 file2 file3...>
+	perl -p -i'.orig' -e 1 file1 file2 file3...
 
 =item B<23. effective way delete file>
 
