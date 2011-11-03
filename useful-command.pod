@@ -1,0 +1,12 @@
+=pod
+
+=head1 command note
+
+=over 10000
+
+=item B< find >
+
+C<find . -type l -print | perl -nle '-e || print'>
+
+=item B<>
+=cut
