@@ -2,9 +2,9 @@
 
 =head1 B<perl note>
 
-POD 格式 http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
+POD 格式 L<http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc>
 
-=over 1000
+=over
 
 =item B<1. match content from ... to ...>
 
@@ -254,10 +254,24 @@ C<find . -mtime +7 -print | perl -nle unlink>
 
 This is faster than using the -exec switch of find because you don't have to start a process on every filename found.
 
+=item B<24. open >
 
-=item B<24. >
+Use Indirect Filehandles make namespace management easier; and it's also has lexical scope.
+
+C<open my $fh, '<', $file or die $!;>
+
+three op for |
+
+got $command output
+
+C<open my $fh, '-|', $command or die $!;>
+
+put output to $command
+
+C<open my $fh, '|-', $command or die $!;>
 
 =cut
 
 =back
+
 
