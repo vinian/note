@@ -1,5 +1,7 @@
 =pod
 
+=encoding utf8
+
 =over 1000
 
 =item B<关闭当前搜索高亮>
