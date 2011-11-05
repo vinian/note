@@ -1,10 +1,8 @@
-=pod
-
 =encoding utf8
 
 =head1 B<perl note>
 
-POD ∏Ò Ω http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
+POD Ê†ºÂºè http://www.pgsqldb.org/mwiki/index.php/PerlCulture_PlainOldDoc
 
 =over 1000
 
