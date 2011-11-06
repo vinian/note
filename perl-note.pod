@@ -270,6 +270,18 @@ put output to $command
 
 C<open my $fh, '|-', $command or die $!;>
 
+filename contain whitespace, Leading whitespace is protected by inserting a "./" in front of a filename that starts with whitespace. Trailing whitespace is protected by appending an ASCII NUL byte ("\0") at the end of the string.
+
+     $file =~ s#^(\s)#./$1#;
+     open(FH, "< $file\0")   || die "can't open $file: $!";
+
+STDOUT add pager
+
+    $pager = $ENV{PAGER} || "(less || more)";
+    open(STDOUT, "| $pager")
+        || die "can't fork a pager: $!";
+
+
 =cut
 
 =back
