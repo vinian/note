@@ -40,23 +40,21 @@ perlfaq3 - 编程工具
 
 =head2 Is there a Perl shell?
 
-The C<psh> (Perl sh) is currently at version 1.8. The Perl Shell is a shell
-that combines the interactive nature of a Unix shell with the power of
-Perl. The goal is a full featured shell that behaves as expected for
-normal shell activity and uses Perl syntax and functionality for
-control-flow statements and other things. You can get C<psh> at
-http://sourceforge.net/projects/psh/ .
+C<psh> (Perl sh) 现在的版本号是1.8。Perl Shell 是一个不仅拥有
+unix shell 的交互式特点，还拥有强大的 Perl 特性的 shell。它的目标是
+a full featured shell that behaves as expected for
+normal shell activity 和利用 Perl 语法和功能处理流程控制和
+做其它的工作。你可以在L<http://sourceforge.net/projects/psh/>获取到C<psh>。
 
-C<Zoidberg> is a similar project and provides a shell written in perl,
-configured in perl and operated in perl. It is intended as a login shell
-and development environment. It can be found at
-http://pardus-larus.student.utwente.nl/~pardus/projects/zoidberg/
-or your local CPAN mirror.
+C<Zoidberg> 是一个相似的项目同时提供一个用 Perl 写的 shell，
+configured in perl and operated in perl. 它是作为一个登录 shell 
+和开发环境而设计的，你可以在
+L<http://pardus-larus.student.utwente.nl/~pardus/projects/zoidberg/>
+或是你附近的 CPAN 站点找到它。
 
-The C<Shell.pm> module (distributed with Perl) makes Perl try commands
-which aren't part of the Perl language as shell commands.  C<perlsh> from
-the source distribution is simplistic and uninteresting, but may still
-be what you want.
+C<Shell.pm> 模块 ( 和 Perl 一块分发 ) 让 Perl 像 shell 那样执行
+那些不是 Perl 语言自身所带的命令。C<perlsh> 从代码角度非常简单，没有
+什么有趣的地方，但是仍然可能是你所需要的。
 
 =head2 How do I find which modules are installed on my system?
 
