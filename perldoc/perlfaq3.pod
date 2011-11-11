@@ -10,36 +10,33 @@ perlfaq3 - 编程工具
 
 =head2 我该怎样做 (anything)?
 
-Have you looked at CPAN (see L<perlfaq2>)?  The chances are that
-someone has already written a module that can solve your problem.
-Have you read the appropriate manpages?  Here's a brief index:
+你曾今看过 CPAN 吗(请看 L<perlfaq2>)? 有可能某个人已经写一个模块
+解决了你的问题，你阅读过相关的帮助手册吗？下面是简单的索引:
 
-	Basics	        perldata, perlvar, perlsyn, perlop, perlsub
-	Execution	perlrun, perldebug
-	Functions	perlfunc
-	Objects		perlref, perlmod, perlobj, perltie
-	Data Structures	perlref, perllol, perldsc
-	Modules		perlmod, perlmodlib, perlsub
-	Regexes		perlre, perlfunc, perlop, perllocale
+	基础	        perldata, perlvar, perlsyn, perlop, perlsub
+	运行        	perlrun, perldebug
+	函数        	perlfunc
+	对象    		perlref, perlmod, perlobj, perltie
+	数据结构    	perlref, perllol, perldsc
+	模块		    perlmod, perlmodlib, perlsub
+	正则        	perlre, perlfunc, perlop, perllocale
 	Moving to perl5	perltrap, perl
 	Linking w/C	perlxstut, perlxs, perlcall, perlguts, perlembed
 	Various 	http://www.cpan.org/misc/olddoc/FMTEYEWTK.tgz
-			(not a man-page but still useful, a collection
-			 of various essays on Perl techniques)
+			(不是帮助也，但还是有用的，汇集了许多 Perl 技术论文)
 
-A crude table of contents for the Perl manpage set is found in L<perltoc>.
+一张简陋的，关于 Perl 帮助手册集的表可以在 L<perltoc> 里找到.
 
-=head2 How can I use Perl interactively?
+=head2 我怎样才能交互式的使用 Perl?
 
-The typical approach uses the Perl debugger, described in the
-C<perldebug(1)> manpage, on an "empty" program, like this:
+典型的方式是使用 Perl 调试器，在 C<perldebug(1)> 帮助里有介绍，
+在一个“空”程序里,像这样： 
 
     perl -de 42
 
-Now just type in any legal Perl code, and it will be immediately
-evaluated.  You can also examine the symbol table, get stack
-backtraces, check variable values, set breakpoints, and other
-operations typically found in symbolic debuggers.
+现在只需要输入任何合理的 Perl 代码，它将会立即执行，你当然也可以查看
+符号表，获取堆的回调内容，检查变量值，设置断点，或者是其它常见于符号
+表调试器的操作。
 
 =head2 Is there a Perl shell?
 
