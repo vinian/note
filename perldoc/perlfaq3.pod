@@ -52,33 +52,31 @@ configured in perl and operated in perl. 它是作为一个登录 shell
 L<http://pardus-larus.student.utwente.nl/~pardus/projects/zoidberg/>
 或是你附近的 CPAN 站点找到它。
 
-C<Shell.pm> 模块 ( 和 Perl 一块分发 ) 让 Perl 像 shell 那样执行
-那些不是 Perl 语言自身所带的命令。C<perlsh> 从代码角度非常简单，没有
-什么有趣的地方，但是仍然可能是你所需要的。
+C<Shell.pm> 模块( 和 Perl 一块分发 )让 Perl 像 shell 那样执行
+那些不是 Perl 语言自身所带的命令。C<perlsh> 从代码角度来看非常简单，
+没有什么有趣的地方，但是仍然可能是你所需要的。
 
-=head2 How do I find which modules are installed on my system?
+=head2 如何找到我的机器上安装了某个模块？
 
-From the command line, you can use the C<cpan> command's C<-l> switch:
+从命令行，你可以使用 C<cpan> 的命令开关 C<-l>:
 
 	$ cpan -l
 
-You can also use C<cpan>'s C<-a> switch to create an autobundle file
-that C<CPAN.pm> understands and can use to re-install every module:
+你也可以利用 C<cpan> 的 C<-a> 选项制作一个 autobundle 文件，它可以被
+C<cpan.pm> 识别，并且可以重装任何模块：
 
 	$ cpan -a
 
-Inside a Perl program, you can use the C<ExtUtils::Installed> module to
-show all installed distributions, although it can take awhile to do
-its magic.  The standard library which comes with Perl just shows up
-as "Perl" (although you can get those with C<Module::CoreList>).
+在 Perl 程序里，你可以使用 C<ExtUtils::Installed> 模块来显示安装的所有
+模块，但它做这些神奇的事需要花一些时间。标准的随着 Perl 分发的模块只会
+显示 "Perl" (你也可以利用 C<Module::CoreList> 获得这些信息)。
 
 	use ExtUtils::Installed;
 
 	my $inst    = ExtUtils::Installed->new();
 	my @modules = $inst->modules();
 
-If you want a list of all of the Perl module filenames, you
-can use C<File::Find::Rule>:
+如果你需要所有 Perl 模块名的一个列表，可以用 C<File::Find::Rule>
 
 	use File::Find::Rule;
 
@@ -89,8 +87,8 @@ can use C<File::Find::Rule>:
 		in( @INC )
 		;
 
-If you do not have that module, you can do the same thing
-with C<File::Find> which is part of the standard library:
+如果你没有那个模块，可以使用 C<File::Find> 做同样的事，它是
+Perl 的标准模块
 
 	use File::Find;
 	my @files;
@@ -109,16 +107,13 @@ with C<File::Find> which is part of the standard library:
 
 	print join "\n", @files;
 
-If you simply need to quickly check to see if a module is
-available, you can check for its documentation.  If you can
-read the documentation the module is most likely installed.
-If you cannot read the documentation, the module might not
-have any (in rare cases):
+如果你仅仅只需要快速检查一个模块可否使用，你只需要检查它的
+文档。如果你可以阅读它的文档，那么它很有可能已经安装，如果
+不能的话，这个模块可能没有安装(这种情况很少见):
 
 	$ perldoc Module::Name
 
-You can also try to include the module in a one-liner to see if
-perl finds it:
+你也可以使用单行程序导入那么模块，看 perl 能否发现它:
 
 	$ perl -MModule::Name -e1
 
