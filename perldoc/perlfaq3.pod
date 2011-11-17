@@ -113,7 +113,7 @@ Perl 的标准模块
 
 	$ perldoc Module::Name
 
-你也可以使用单行程序导入那么模块，看 perl 能否发现它:
+你也可以使用单行程序导入那个模块，看 perl 能否发现它:
 
 	$ perl -MModule::Name -e1
 
