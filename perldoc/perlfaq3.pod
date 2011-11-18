@@ -117,43 +117,40 @@ Perl 的标准模块
 
 	$ perl -MModule::Name -e1
 
-=head2 How do I debug my Perl programs?
+=head2 我怎样调试 Perl 程序?
 
-(contributed by brian d foy)
+(brian d foy 供稿)
 
-Before you do anything else, you can help yourself by ensuring that
-you let Perl tell you about problem areas in your code. By turning
-on warnings and strictures, you can head off many problems before
-they get too big. You can find out more about these in L<strict>
-and L<warnings>.
+在你做任何事之前，你可以让 Perl 告诉你的代码哪些地方存在问题。通过
+打开 warnings 和 strictures，你可以提前预防许多问题。你可以在
+L<strict> 和 L<warnings> 手册里找到更多相关信息。
 
 	#!/usr/bin/perl
 	use strict;
 	use warnings;
 
-Beyond that, the simplest debugger is the C<print> function. Use it
-to look at values as you run your program:
+除了上面所说的之外，最简单的调试器是 C<print> 函数。在你运行程序的
+时候通过它来查看变量：
 
 	print STDERR "The value is [$value]\n";
 
-The C<Data::Dumper> module can pretty-print Perl data structures:
+C<Data::Dumper> 模块可以很漂亮的打印出 Perl 的数据结构：
 
 	use Data::Dumper qw( Dumper );
 	print STDERR "The hash is " . Dumper( \%hash ) . "\n";
 
-Perl comes with an interactive debugger, which you can start with the
-C<-d> switch. It's fully explained in L<perldebug>.
+Perl 自带了一个交互式的调试器，你可以通过 C<-d> 选项来打开它。它在
+L<perldebug> 有非常详细的解释。 
 
-If you'd like a graphical user interface and you have C<Tk>, you can use
-C<ptkdb>. It's on CPAN and available for free.
+如果你想要一个图形界面，同时你安装了 C<Tk>，那么你可以使用 C<ptkdb>。
+它在 CPAN 上，可以免费的获取。
 
-If you need something much more sophisticated and controllable, Leon
-Brocard's C<Devel::ebug> (which you can call with the C<-D> switch as C<-Debug>)
-gives you the programmatic hooks into everything you need to write your
-own (without too much pain and suffering).
+如果你需要一些更程序，更多控制性的调试器。Leon Brocard 的 
+C<Devel::ebug> (你可以把 C<-D> 开关换成 C<-Debug> 调用)给你提供
+很多可编程的接口方便你写自己的调试器(使用不太困难)。
 
-You can also use a commercial debugger such as Affrus (Mac OS X), Komodo
-from Activestate (Windows and Mac OS X), or EPIC (most platforms).
+你也可以使用付费的调试器，比如 Affurs (苹果系统)，Activestate 
+开发的 Komode (微软和苹果系统)，或是 EPIC (大部分平台)。
 
 =head2 How do I profile my Perl programs?
 
