@@ -282,6 +282,14 @@ STDOUT add pager
         || die "can't fork a pager: $!";
 
 
+=item B<25. parse reference>
+
+Perl follows these two simple rules while parsing such expressions: ( $$array[1] == ${$array}[1] ) (1) Key or index lookups are done at the end, and (2) the prefix closest to a variable name binds most closely.
+
+=item B<26. reference scalar >
+
+passing references to scalars typically turns out not to be an optimization at all.
+
 =cut
 
 =back
