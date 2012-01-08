@@ -1,0 +1,16 @@
+=encoding utf-8
+
+=pod
+
+=head1 cool one liner program
+
+=over 
+
+=item B<http://www.perlmonks.org/?node_id=940559>
+
+ 	  perl -le '$_=1;print,s/(\d+) ?/+$1 $1/g,s/\S+/$&/eeg until$a++>15'
+
+	  perl -le '$_=o;print,s/./$&$&/g,s/(?!^)(.)(.)/$1^$2^_/eg until$a++>80'
+
+=cut
+
