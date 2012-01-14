@@ -10,5 +10,12 @@
 
 C<find . -type l -print | perl -nle '-e || print'>
 
-=item B<>
+=item B< empty file>
+
+C<cat /dev/null > file >
+
+    or
+
+C< : >file>
+
 =cut

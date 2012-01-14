@@ -290,6 +290,14 @@ Perl follows these two simple rules while parsing such expressions: ( $$array[1]
 
 passing references to scalars typically turns out not to be an optimization at all.
 
+=item B<27. hash>
+   You can preallocate space for a hash by assigning to the keys()
+   function.  This rounds up the allocated buckets to the next power of
+   two:
+
+       keys(%users) = 1000;                # allocate 1024 buckets
+
+
 =cut
 
 =back
