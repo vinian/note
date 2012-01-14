@@ -10,12 +10,18 @@
 
 C<find . -type l -print | perl -nle '-e || print'>
 
-=item B< empty file>
+=item B< empty file >
 
-C<cat /dev/null > file >
+    cat /dev/null >file 
 
     or
 
-C< : >file>
+    : >file  # this does not fork a new process, since ":" is a builtin.
+
+=item B< mv dir >
+
+    (cd /source/directory && tar cf - . ) | (cd /dest/directory && tar xpvf -)
+    # Move entire file tree from one directory to another
+    # [courtesy Alan Cox <a.cox@swansea.ac.uk>, with a minor change]
 
 =cut
