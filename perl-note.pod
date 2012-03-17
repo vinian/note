@@ -297,6 +297,13 @@ passing references to scalars typically turns out not to be an optimization at a
 
        keys(%users) = 1000;                # allocate 1024 buckets
 
+=item B<28. repeat read DATA>
+
+    while ( 1 ) {
+        my $pos = tell DATA;
+        print while ( <DATA> );
+        seek DATA, $pos, 0;
+    }
 
 =cut
 
