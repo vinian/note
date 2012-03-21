@@ -12,5 +12,9 @@
 
 	  perl -le '$_=o;print,s/./$&$&/g,s/(?!^)(.)(.)/$1^$2^_/eg until$a++>80'
 
+=item B<去掉文件名首的 .>
+
+	  for i in `ls .[a-zA-Z1-9]*`; do mv -v $i ${i:1}; done
+	  
 =cut
 
