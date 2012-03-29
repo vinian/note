@@ -16,5 +16,10 @@
 
 	  for i in `ls .[a-zA-Z1-9]*`; do mv -v $i ${i:1}; done
 	  
-=cut
+=item B<从视频文件里提取某个片段>
 
+    从 $in-file 拷贝 begin-time 到 begin-time+duration 时间断内的视频,视频和音频拷贝,丢掉字幕
+
+    ffmpeg -i $in-file -ss begind-time[00:04:09] -t duration[00:05:00] -vcodec copy -acodec copy -sn $out-file
+
+=cut

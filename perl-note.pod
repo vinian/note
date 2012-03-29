@@ -299,8 +299,8 @@ passing references to scalars typically turns out not to be an optimization at a
 
 =item B<28. repeat read DATA>
 
+    my $pos = tell DATA;
     while ( 1 ) {
-        my $pos = tell DATA;
         print while ( <DATA> );
         seek DATA, $pos, 0;
     }
