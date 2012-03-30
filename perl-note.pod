@@ -305,7 +305,31 @@ passing references to scalars typically turns out not to be an optimization at a
         seek DATA, $pos, 0;
     }
 
+=item B<29. Slice >
+
+    #!/usr/bin/perl
+    #
+    use strict;
+    use warnings;
+
+    use Smart::Comments;
+
+    my @item = qw(first second third);
+    my $hash = {
+        world => {
+            first  => 1,
+            second => 2,
+            third  => 3,
+        },
+    };
+
+    ### $hash
+    @{$hash->{world}}{@item} = ( 4, 5, 6);
+    ### $hash
+
+
 =cut
+
 
 =back
 
