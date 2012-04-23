@@ -22,4 +22,9 @@
 
     ffmpeg -i $in-file -ss begind-time[00:04:09] -t duration[00:05:00] -vcodec copy -acodec copy -sn $out-file
 
+=item B<mplayer 循环播放歌曲>
+
+	  mplayer music-file -loop $times
+	  : $times 播放次数, 0 则无限循环
+
 =cut
