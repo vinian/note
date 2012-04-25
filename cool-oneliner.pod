@@ -22,9 +22,13 @@
 
     ffmpeg -i $in-file -ss begind-time[00:04:09] -t duration[00:05:00] -vcodec copy -acodec copy -sn $out-file
 
+=item B<mplayer 循环播放歌曲>
+
+	  mplayer music-file -loop $times
+	  : $times 播放次数, 0 则无限循环
+
 =item B<使用 ffmpeg 对视频截图>
 
 	ffmpeg -i INPUT-FILE -y -f image2 -ss 5 -s 352x240 -vframes 1 OUTPUT.jpg
 	ffmpeg -i INPUT-File -y -f image2 -ss 5 -t 0.001 -s 352x240 OUTPUT.jpg
-
 =cut
