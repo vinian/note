@@ -22,4 +22,9 @@
 
     ffmpeg -i $in-file -ss begind-time[00:04:09] -t duration[00:05:00] -vcodec copy -acodec copy -sn $out-file
 
+=item B<使用 ffmpeg 对视频截图>
+
+	ffmpeg -i INPUT-FILE -y -f image2 -ss 5 -s 352x240 -vframes 1 OUTPUT.jpg
+	ffmpeg -i INPUT-File -y -f image2 -ss 5 -t 0.001 -s 352x240 OUTPUT.jpg
+
 =cut
