@@ -327,6 +327,8 @@ passing references to scalars typically turns out not to be an optimization at a
     @{$hash->{world}}{@item} = ( 4, 5, 6);
     ### $hash
 
+=item B<29. Remove ^M>
+    tr/\015//d
 
 =cut
 
