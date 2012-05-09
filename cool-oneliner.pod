@@ -31,4 +31,8 @@
 
 	ffmpeg -i INPUT-FILE -y -f image2 -ss 5 -s 352x240 -vframes 1 OUTPUT.jpg
 	ffmpeg -i INPUT-File -y -f image2 -ss 5 -t 0.001 -s 352x240 OUTPUT.jpg
+
+=item B<去掉最后一行>
+	  
+	  sed -i '$d' file
 =cut
