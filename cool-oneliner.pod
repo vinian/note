@@ -35,4 +35,11 @@
 =item B<去掉最后一行>
 	  
 	  sed -i '$d' file
+
+=item B<指定 ip 访问域名>
+    
+    curl -v -l -H 'Host:example.org' http://xxx.xxx.xxx.xxx/path/to/request
+    curl -vx xxx.xxx.xxx.xxx:80 http://example.org/path/to/request
+    wget http://xxx.xxx.xxx.xxx/path/to/request --header='host:example.org'
+
 =cut
