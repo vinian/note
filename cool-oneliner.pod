@@ -43,12 +43,14 @@
     wget http://xxx.xxx.xxx.xxx/path/to/request --header='host:example.org'
 
 =item B<mplayer 字幕在视频图片的下方>
+
     # 全屏时字幕下移
     mpalyer -subcp srt-encode -sub srt-file-name -vo gl file-name
     # 图像上移
     mpalyer -subcp srt-encode -sub srt-file-name -vf expand=0:-80:0:0 file-name
 
 =item B<使用不同格式的字幕>
+
     # 繁体字幕
     mplayer -subcp big5 -sub file-name.cht.srt film-file-name
     mplayer -subcp gb18030 -sub file-name.cht.srt film-file-name
