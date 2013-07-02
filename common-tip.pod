@@ -1,0 +1,22 @@
+=encoding utf-8
+
+=head1 常用易忘的命令 
+
+=item mysql change password
+    mysql> UPDATE mysql.user SET Password=PASSWORD('MyNewPass')
+    ->                   WHERE User='root';
+    mysql> FLUSH PRIVILEGES;
+
+=item mysql 指定 IP 可以连接 
+    
+    GRANT ALL PRIVILEGES ON dbname.table TO 'user'@'ipaddr' IDENTIFIED BY 'password';
+    GRANT ALL PRIVILEGES ON test.* TO 'test'@'192.168.0.22' IDENTIFIED BY 'test';
+
+=item mencoder resample frame rate
+
+   mencoder $input_file -vf filmdint=${input_fps}:${output_fps}/fast=0,softskip,harddup --
+   ${input_fps} and ${output_fps} must be int
+
+=cut
+
+    

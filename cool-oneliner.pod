@@ -32,6 +32,10 @@
 	ffmpeg -i INPUT-FILE -y -f image2 -ss 5 -s 352x240 -vframes 1 OUTPUT.jpg
 	ffmpeg -i INPUT-File -y -f image2 -ss 5 -t 0.001 -s 352x240 OUTPUT.jpg
 
+=item B<mplayer get screenshot>
+
+    mplayer -ss START_TIME -nosound -vo png -frames NUMBER -vf "scale=HEIGHT:WIDTH" SOURCE_FILE
+
 =item B<去掉最后一行>
 	  
 	  sed -i '$d' file
@@ -57,6 +61,12 @@
     # 简体字幕
     mplayer -subcp gb2312 -sub file-name.cht.srt film-file-name
     mplayer -subcp cp936 -sub file-name.cht.srt film-file-name
+
+=item B<show specific line>
+     # show 4075th of file
+     perl -lne 'print, exit if $. == 4075' file.txt
+     sed -n '4075p' file.txt
+     awk 'NR==4075'  file.txt
 
 
 =cut
