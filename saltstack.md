@@ -151,4 +151,45 @@ Dependency Versions:
 ```bash
 pip install pyzmq==16.0.2
 ```
+```bash
+salt-minion --versions-report
+Salt Version:
+           Salt: 2016.11.8
 
+Dependency Versions:
+           cffi: Not Installed
+       cherrypy: Not Installed
+       dateutil: 1.4.1
+      docker-py: Not Installed
+          gitdb: Not Installed
+      gitpython: Not Installed
+          ioflo: Not Installed
+         Jinja2: 2.8.1
+        libgit2: Not Installed
+        libnacl: Not Installed
+       M2Crypto: Not Installed
+           Mako: Not Installed
+   msgpack-pure: Not Installed
+ msgpack-python: 0.4.6
+   mysql-python: Not Installed
+      pycparser: Not Installed
+       pycrypto: 2.6.1
+   pycryptodome: Not Installed
+         pygit2: Not Installed
+         Python: 2.6.6 (r266:84292, Aug 18 2016, 15:13:37)
+   python-gnupg: Not Installed
+         PyYAML: 3.11
+          PyZMQ: 16.0.2
+           RAET: Not Installed
+          smmap: Not Installed
+        timelib: Not Installed
+        Tornado: 4.2.1
+            ZMQ: 4.1.6
+
+System Versions:
+           dist: centos 6.3 Final
+        machine: x86_64
+        release: 2.6.32-431.el6.x86_64
+         system: Linux
+        version: CentOS 6.3 Final
+```
