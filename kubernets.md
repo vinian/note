@@ -1,4 +1,7 @@
-## 本地运行 kube via minikube
+
+# 遇到问题
+
+## 本地运行 kube via minikube, 但是 vm ip 却连不上
 
 ```bash
 vbox:~# minikube start
@@ -321,3 +324,9 @@ vinian@vbox:~$ ip r get 192.168.99.100
 192.168.99.100 via 192.168.1.1 dev eth0 src 192.168.1.10
     cache
 ```
+
+关掉 cisco anyconnect 后，尝试添加路由，发现能添加上
+重启机器，启动 minikube，路由自动添加，然后启动 cisco anyconnect 没有任何影响
+重启机器，开启 cisco anyconnect，然后启动 minikube，192.168.99.0/24 这一条路由就没有
+
+后续继续排查
