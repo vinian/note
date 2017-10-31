@@ -1,5 +1,6 @@
 
-## Centos 6.3 安装 2016.11 版本启动不了
+
+### Centos 6.3 安装 2016.11 版本启动不了
 
 原因: pyzmq 版本太老
 
@@ -192,4 +193,26 @@ System Versions:
         release: 2.6.32-431.el6.x86_64
          system: Linux
         version: CentOS 6.3 Final
+```
+
+
+### store pem file in pillar
+
+pillar file
+
+```yaml
+# pillarfile
+key: |
+  -----BEGIN CERTIFICATE-----
+  ...
+  -----END CERTIFICATE-----
+
+```
+
+state file
+```yaml
+filetomanage:
+  file.managed:
+    contents_pillar: key
+    ...
 ```
