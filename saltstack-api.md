@@ -1,6 +1,6 @@
 # enable salt-api on debian
 
-** all the command run on salt-master **
+**all the command run on salt-master**
 
 ## 1. install salt-api
 ```bash
@@ -65,6 +65,6 @@ return:
   user: saltapi
 ```
 
-** if you want to run other fun by user saltapi, you must explicit add it to mater config external_auth **
+**if you want to run other fun by user saltapi, you must explicit add it to mater config external_auth**
 
 [salt-api docs](https://docs.saltstack.com/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html)
