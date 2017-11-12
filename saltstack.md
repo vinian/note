@@ -216,3 +216,11 @@ filetomanage:
     contents_pillar: key
     ...
 ```
+
+
+### difference pillar[var], pillar.get(var), salt.pillar.get(var)
+
+
+### salt-api 
+
+[install salt-api on debian] http://github.com/vinian/note/saltstack-api.yaml
