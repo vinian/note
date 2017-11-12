@@ -223,4 +223,4 @@ filetomanage:
 
 ### salt-api 
 
-[install salt-api on debian] (https://github.com/vinian/note/blob/master/saltstack-api.md)
+[install salt-api on debian](https://github.com/vinian/note/blob/master/saltstack-api.md)

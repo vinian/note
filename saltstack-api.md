@@ -67,4 +67,4 @@ return:
 
 ** if you want to run other fun by user saltapi, you must explicit add it to mater config external_auth **
 
-[salt-api docs] (https://docs.saltstack.com/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html)
+[salt-api docs](https://docs.saltstack.com/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html)
