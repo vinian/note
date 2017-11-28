@@ -65,6 +65,6 @@ return:
   user: saltapi
 ```
 
-**if you want to run other fun by user saltapi, you must explicit add it to mater config external_auth**
+**if you want to run other fun by user saltapi, you must explicit add it to master config external_auth**
 
 [salt-api docs](https://docs.saltstack.com/en/latest/ref/netapi/all/salt.netapi.rest_cherrypy.html)
